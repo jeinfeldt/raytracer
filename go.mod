@@ -8,6 +8,7 @@ require (
 	github.com/cheggaaa/pb/v3 v3.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/google/go-cmp v0.4.0 // indirect
+	github.com/leekchan/accounting v0.0.0-20191218023648-17a4ce5f94d4 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.2.2 // indirect
 	github.com/pelletier/go-toml v1.7.0 // indirect
@@ -20,6 +21,7 @@ require (
 	github.com/spf13/viper v1.6.3
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/stretchr/testify v1.5.1
+	go.aoe.com/flamingo-om3 v2.0.0+incompatible
 	golang.org/x/sys v0.0.0-20200413165638-669c56c373c4 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	gopkg.in/VividCortex/ewma.v1 v1.1.1 // indirect

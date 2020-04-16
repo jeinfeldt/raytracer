@@ -1,11 +1,9 @@
-package renderer
+package scene
 
 import (
 	"image"
 
 	"github.com/cheggaaa/pb"
-	"github.com/jeinfeldt/raytracer/raytracing/camera"
-	"github.com/jeinfeldt/raytracer/raytracing/scene"
 	"github.com/jeinfeldt/raytracer/raytracing/util"
 	"github.com/jeinfeldt/raytracer/raytracing/vector"
 )
@@ -21,14 +19,14 @@ type (
 	// Renderer renders a scene
 	Renderer struct {
 		width, height int
-		scene         scene.Scene
-		camera        camera.Camera
+		scene         Scene
+		camera        Camera
 	}
 )
 
-// New factory method to create a new renderer to render an image
+// NewRenderer factory method to create a new renderer to render an image
 // with given width, height camera and scene
-func New(width, height int, c camera.Camera, s scene.Scene) Renderer {
+func NewRenderer(width, height int, c Camera, s Scene) Renderer {
 	return Renderer{
 		width:  width,
 		height: height,

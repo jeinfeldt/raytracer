@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	fileName = "image.png"
+	fileName = "scene.png"
 )
 
 // Run runs the demo with the default renderer, scene

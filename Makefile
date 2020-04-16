@@ -1,8 +1,8 @@
 # Makefile
 
 # Constants
-WIDTH=800
-HEIGHT=600
+WIDTH=100
+HEIGHT=50
 
 # Targets
 run:

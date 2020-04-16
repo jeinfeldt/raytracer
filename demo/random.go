@@ -2,17 +2,16 @@ package demo
 
 import (
 	"github.com/jeinfeldt/raytracer/raytracing/object"
-	"github.com/jeinfeldt/raytracer/raytracing/renderer"
 	"github.com/jeinfeldt/raytracer/raytracing/scene"
 	"github.com/jeinfeldt/raytracer/raytracing/util"
 	"github.com/jeinfeldt/raytracer/raytracing/vector"
 )
 
 // NewRandomRenderer factory for new ppm renderer
-func NewRandomRenderer(width, height int) renderer.Renderer {
+func NewRandomRenderer(width, height int) scene.Renderer {
 	camera := NewDefaultCamera(width, height)
-	scene := NewRandomScene()
-	return renderer.New(width, height, camera, scene)
+	random := NewRandomScene()
+	return scene.NewRenderer(width, height, camera, random)
 }
 
 // NewRandomScene factory for scene

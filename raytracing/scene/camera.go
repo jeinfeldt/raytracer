@@ -1,4 +1,4 @@
-package camera
+package scene
 
 import (
 	"math"
@@ -22,8 +22,8 @@ type (
 	}
 )
 
-// New factory method to fetch a new camera
-func New(
+// NewCamera factory method to fetch a new camera
+func NewCamera(
 	lookfrom, lookat, vup vector.Vector3,
 	vfov, aspect, aperture, focusDist float64,
 ) Camera {

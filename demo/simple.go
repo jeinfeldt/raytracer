@@ -1,22 +1,20 @@
 package demo
 
 import (
-	"github.com/jeinfeldt/raytracer/raytracing/camera"
 	"github.com/jeinfeldt/raytracer/raytracing/object"
-	"github.com/jeinfeldt/raytracer/raytracing/renderer"
 	"github.com/jeinfeldt/raytracer/raytracing/scene"
 	"github.com/jeinfeldt/raytracer/raytracing/vector"
 )
 
 // NewSimpleRenderer factory for new ppm renderer (basic tutorial render)
-func NewSimpleRenderer(width, height int) renderer.Renderer {
+func NewSimpleRenderer(width, height int) scene.Renderer {
 	camera := NewSimpleCamera(width, height)
-	scene := NewSimpleScene()
-	return renderer.New(width, height, camera, scene)
+	simple := NewSimpleScene()
+	return scene.NewRenderer(width, height, camera, simple)
 }
 
 // NewSimpleCamera factory for new camera
-func NewSimpleCamera(width, height int) camera.Camera {
+func NewSimpleCamera(width, height int) scene.Camera {
 	lookfrom := vector.New(3, 3.0, 2)
 	lookat := vector.New(0.0, 0.0, -1.0)
 	vup := vector.New(0.0, 1.0, 0.0)
@@ -24,7 +22,7 @@ func NewSimpleCamera(width, height int) camera.Camera {
 	focusDist := focus.Length()
 	aperture := 2.0
 	ratio := float64(width) / float64(height)
-	return camera.New(lookfrom, lookat, vup, 20, ratio, aperture, focusDist)
+	return scene.NewCamera(lookfrom, lookat, vup, 20, ratio, aperture, focusDist)
 }
 
 // NewSimpleBackground factory for background
