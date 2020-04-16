@@ -9,7 +9,7 @@ import (
 )
 
 // NewSimpleRenderer factory for new ppm renderer (basic tutorial render)
-func NewSimpleRenderer(width, height int) renderer.PPMRenderer {
+func NewSimpleRenderer(width, height int) renderer.Renderer {
 	camera := NewSimpleCamera(width, height)
 	scene := NewSimpleScene()
 	return renderer.New(width, height, camera, scene)

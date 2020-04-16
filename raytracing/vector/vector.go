@@ -7,11 +7,6 @@ import (
 	"github.com/jeinfeldt/raytracer/raytracing/util"
 )
 
-const (
-	// colourTransformation used to translate decimal values to colour values
-	colourTransformation float64 = 256
-)
-
 type (
 	// Vector3 represent a vector with three coordinates
 	Vector3 struct {
@@ -93,21 +88,6 @@ func (v *Vector3) Length() float64 {
 // Example: {2, 1, 2}.length = 2*2 + 1*1 + 2*2 = 9
 func (v *Vector3) LengthSquared() float64 {
 	return v.x*v.x + v.y*v.y + v.z*v.z
-}
-
-// WriteColour writes the translated [0,255] value of each color component.
-func (v *Vector3) WriteColour(samples int) string {
-	// Divide the color total by the number of samples and gamma-correct
-	// for a gamma value of 2.0.
-	template := "%d %d %d\n"
-	scale := 1.0 / float64(samples)
-	r := math.Sqrt(v.x * scale)
-	g := math.Sqrt(v.y * scale)
-	b := math.Sqrt(v.z * scale)
-	x := int32(util.Clamp(r, 0, 0.999) * colourTransformation)
-	y := int32(util.Clamp(g, 0, 0.999) * colourTransformation)
-	z := int32(util.Clamp(b, 0, 0.999) * colourTransformation)
-	return fmt.Sprintf(template, x, y, z)
 }
 
 // String output for vector

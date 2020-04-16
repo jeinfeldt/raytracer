@@ -1,7 +1,14 @@
 package demo
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/jeinfeldt/raytracer/raytracing/output"
+)
+
+const (
+	fileName = "image.png"
 )
 
 // Run runs the demo with the default renderer, scene
@@ -9,8 +16,14 @@ import (
 // https://raytracing.github.io/books/RayTracingInOneWeekend.html
 // returns the output ppm image as string
 func Run(width, height int) {
+	fmt.Println("starting...")
 	renderer := NewRandomRenderer(width, height)
-	pixels := renderer.Render()
-	out := output.NewPPM(pixels, width, height)
-	out.Write("", nil)
+	img := renderer.Render()
+	out := output.NewPNG(width, height)
+	err := out.Write(fileName, img)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Println(fmt.Sprintf("all done! created %q", fileName))
 }

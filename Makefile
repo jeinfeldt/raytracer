@@ -1,17 +1,15 @@
 # Makefile
 
 # Constants
-WIDTH=100
-HEIGHT=50
+WIDTH=800
+HEIGHT=600
 
 # Targets
 run:
 	go run main.go
 
 image:
-	go run main.go image $(WIDTH) $(HEIGHT) > image.ppm
-	convert image.ppm image.png
-	rm image.ppm
+	go run main.go image $(WIDTH) $(HEIGHT)
 
 test:
 	go test --count=1 --failfast -v ./...

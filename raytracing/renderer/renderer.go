@@ -1,6 +1,8 @@
 package renderer
 
 import (
+	"image"
+
 	"github.com/cheggaaa/pb"
 	"github.com/jeinfeldt/raytracer/raytracing/camera"
 	"github.com/jeinfeldt/raytracer/raytracing/scene"
@@ -16,8 +18,8 @@ const (
 )
 
 type (
-	// PPMRenderer renders a scene
-	PPMRenderer struct {
+	// Renderer renders a scene
+	Renderer struct {
 		width, height int
 		scene         scene.Scene
 		camera        camera.Camera
@@ -26,8 +28,8 @@ type (
 
 // New factory method to create a new renderer to render an image
 // with given width, height camera and scene
-func New(width, height int, c camera.Camera, s scene.Scene) PPMRenderer {
-	return PPMRenderer{
+func New(width, height int, c camera.Camera, s scene.Scene) Renderer {
+	return Renderer{
 		width:  width,
 		height: height,
 		camera: c,
@@ -36,28 +38,30 @@ func New(width, height int, c camera.Camera, s scene.Scene) PPMRenderer {
 }
 
 // Render renders the given scene as a ppm file
-func (renderer *PPMRenderer) Render() []string {
+func (renderer *Renderer) Render() image.Image {
+	// create image
 	height := renderer.height
 	width := renderer.width
+	img := image.NewRGBA(image.Rect(0, 0, width, height))
 
 	// render scene
-	pixels := make([]string, 0)
 	bar := pb.StartNew(height)
-	for y := height - 1; y >= 0; y-- {
+	for y := 0; y < height; y++ {
 		bar.Increment()
 		for x := 0; x < width; x++ {
-			colour := renderer.smootColour(x, y)
-			pixels = append(pixels, colour.WriteColour(SamplesPerPixel))
+			colour := renderer.smoothColour(x, y)
+			colour.Div(SamplesPerPixel)
+			img.Set(x, height-y-1, &colour)
 		}
 	}
 	bar.Finish()
 
 	// return image data
-	return pixels
+	return img
 }
 
 // shootRay shoots a ray through given pixels and returns corresponding colour
-func (renderer *PPMRenderer) shootRay(x, y int) vector.Vector3 {
+func (renderer *Renderer) shootRay(x, y int) vector.Vector3 {
 	height := renderer.height
 	width := renderer.width
 	scene := renderer.scene
@@ -71,11 +75,11 @@ func (renderer *PPMRenderer) shootRay(x, y int) vector.Vector3 {
 // smoothColour smoothes pixel colour for anti aliasing (smooth edges)
 // this is done by shooting a ray multiple times add a pixel
 // and fetching the aggregated colour
-func (renderer *PPMRenderer) smootColour(x, y int) vector.Vector3 {
-	colour := vector.Vector3{}
+func (renderer *Renderer) smoothColour(x, y int) vector.Vector3 {
+	colour := vector.NewEmpty()
 	// anti aliasing
 	for s := 0; s < SamplesPerPixel; s++ {
-		colour = vector.Add(colour, renderer.shootRay(x, y))
+		colour.Add(renderer.shootRay(x, y))
 	}
 	return colour
 }

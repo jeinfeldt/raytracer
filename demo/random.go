@@ -9,7 +9,7 @@ import (
 )
 
 // NewRandomRenderer factory for new ppm renderer
-func NewRandomRenderer(width, height int) renderer.PPMRenderer {
+func NewRandomRenderer(width, height int) renderer.Renderer {
 	camera := NewDefaultCamera(width, height)
 	scene := NewRandomScene()
 	return renderer.New(width, height, camera, scene)
