@@ -18,7 +18,7 @@ This did not sit right with me since.
 
 So, with some time on my hands, I decided to try again with Go as my language
 of choice. The book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) takes you by the hand and illustrates
-the neccessary math with code examples in C++.
+the necessary math with code examples in C++.
 
 I am in no way a geometry guru and still was able to produce decent results , which should encourage everyone thinking about trying the book.
 
