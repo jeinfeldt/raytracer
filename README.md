@@ -9,8 +9,8 @@ the book if you are interested in image synthesis and shiny spheres.
 
 # Motivation
 During my Bachelors degree a Computer Graphics course was mandatory
-and at the time one assignment was to write a Ray Tracer in Python.
-It was an interesting and challenging task, which at the time was a bit too much for me. 
+and one assignment was to write a Ray Tracer in Python.
+It was an interesting and challenging task, which at the time I was unable to complete. 
 I implemented the ray tracer to fit the requirements for a passing grade and 
 continued with other assignments.
 
