@@ -37,8 +37,7 @@ var imageCmd = &cobra.Command{
 		}
 		// render scene - background is a gradient from blue to white
 		// with a multiple spheres
-		image := demo.Run(width, height)
-		fmt.Print(image)
+		demo.Run(width, height)
 	},
 }
 

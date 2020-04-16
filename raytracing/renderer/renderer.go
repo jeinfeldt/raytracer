@@ -1,9 +1,6 @@
 package renderer
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/cheggaaa/pb"
 	"github.com/jeinfeldt/raytracer/raytracing/camera"
 	"github.com/jeinfeldt/raytracer/raytracing/scene"
@@ -12,10 +9,6 @@ import (
 )
 
 const (
-	// Format standard format for ppm
-	Format = "P3"
-	// MaxColour value for ppm format
-	MaxColour = 255
 	// SamplesPerPixel for anti aliasing
 	SamplesPerPixel = 100
 	// MaxDepth max depth for recursion (ray bounce limit)
@@ -43,10 +36,9 @@ func New(width, height int, c camera.Camera, s scene.Scene) PPMRenderer {
 }
 
 // Render renders the given scene as a ppm file
-func (renderer *PPMRenderer) Render() string {
+func (renderer *PPMRenderer) Render() []string {
 	height := renderer.height
 	width := renderer.width
-	header := renderer.header(Format, width, height, MaxColour)
 
 	// render scene
 	pixels := make([]string, 0)
@@ -60,18 +52,8 @@ func (renderer *PPMRenderer) Render() string {
 	}
 	bar.Finish()
 
-	// trim trailing new line
-	data := strings.Join(pixels, "")
-	data = strings.TrimSuffix(data, "%")
-
 	// return image data
-	return header + data
-}
-
-// header helper function to build the header for the ppm file
-func (renderer *PPMRenderer) header(format string, width, height, maxColour int) string {
-	template := "%s\n%d %d\n%d\n"
-	return fmt.Sprintf(template, format, width, height, maxColour)
+	return pixels
 }
 
 // shootRay shoots a ray through given pixels and returns corresponding colour
